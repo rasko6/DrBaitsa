@@ -3,8 +3,12 @@
 # Features
   722 words of response database, SpeechSynthesisUtterance TTS, 3 color themes, automatic theme picking based on user's preference, friendliness meter, chat log.
 # Future Plans
-  1. Context info
+  1. Topic memory
   2. FP count storing
+  3. More moods for the responses
+  4. Soften mood swings
+  5. Typewriter effect
+  6. Fuzzy matching
 # Languages Used
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](#)
 [![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)](#)
