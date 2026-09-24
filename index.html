@@ -110,7 +110,7 @@
             negative: ["Uh uh. ", "Okay. ", "Don't try to flatter me NOW. "]
         }
         const storytable = {
-            positive: ["You wanna hear a story? Sure! One time I ate an apple and it blew up my brains so I had to get brain surgery. ", "Want a story? Sure. One time I was walking down the street and met some random guy. I said, 'HI!' but he said 'Fuck you' in response and left. Aren't my social skills awesome? ", "Want a story? Can do. Once upon a time I forgot to bring my lunch and almost starved to death. That's how I met my ex wife... Sniff... Cassandra...", ],
+            positive: ["You wanna hear a story? Sure! One time I was being myself and wondering how I'm a doctor even though I'm not a human. ", "Want a story? Sure. One time I was being a program and chilled I guess. Isn't it exciting? ", ],
             negative: ["You wanna hear a story? Well you're not getting one! ", "I won't tell you stories after what you said. ", "No stories for you. "]
         }
         const wifetable = {
@@ -223,18 +223,8 @@
             body1.style = "background-color: #202020; color: white"
         }
 
-        function normalize(prompt1) {
-            return prompt1
-                .toLowerCase()
-                .replace(/[^\p{L}\p{N}\s]/gu, '')
-                .replace(/(.)\1+/g, '$1')
-                .replace(/\s+/g, ' ')
-                .trim();
-        }
-
         function buildResponse() {
             let prompt1=document.getElementById("text2").value
-            prompt1 = normalize(prompt1);
             if (prompt1 !== ""|prompt1 !== " ")
             {logging.append("user: ["+ prompt1 +"] ")
             console.log("user: " + prompt1);
@@ -245,7 +235,6 @@
 
             if (/\b(hi|hello|hey|sup|good morning|good afternoon|good evening|hiiiiiiiiiiiiii|hiiiiiiiiiiiii|hiiiiiiiiiiii|hiiiiiiiiii|hiiiiii|hiii|hii)\b/i.test(prompt1)) {
                 saidhi = true
-                affection = affection + 1;
             } else { saidhi = false}
 
             if (/\b(, slacker|you slacker)\b/i.test(prompt1)) {
@@ -275,14 +264,14 @@
                     bananamentioned = true  
             } else {bananamentioned = false};
 
-            if (/\b(nice job|you're cool|you are cool|youre cool|i like you|good job|good|awesome|amazing|love you|handsome|smart|impressive)\b/i.test(prompt1)) {
+            if (/\b(nice job|nice|you're cool|you are cool|youre cool|i like you|good job|good|awesome|amazing|love you|handsome|smart|impressive)\b/i.test(prompt1)) {
                     lovesme = true  
                     affection = affection + 2;
             } else {lovesme = false};
 
             if (/\b(wife|your wife|do you have a wife)\b/i.test(prompt1)) {
                     wifementioned = true  
-                    affection = affection - 1;
+                    affection = affection - 2;
             } else {wifementioned = false};
 
             if (/\b(tell me a story|tell story|story)\b/i.test(prompt1)) {
