@@ -5,10 +5,11 @@ An open-source,  symbolic AI chatbot written in JavaScript. Attempt to make a mo
 # Future Plans
 1. Topic memory
 2. FP count storing
-3. More moods for the responses
-4. No crazy mood swings
-5. Typewriter effect
-6. Fuzzy matching ✔
+3. blocking FP farm
+4. More moods for the responses
+5. No crazy mood swings
+6. Typewriter effect
+7. Fuzzy matching ✔
 # Font Used
 https://fonts.google.com/specimen/Play
 # Languages Used
