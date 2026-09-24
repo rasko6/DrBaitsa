@@ -172,7 +172,19 @@
         } else {
             LT()
         }
+        let cooldown = false;
+        document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            if (cooldown == false) {
+                submitt();
+                cooldown = true;
+                setTimeout(() => {
+                    cooldown = false
+                }, 1800);    
+            }
 
+        }
+        });
         soundRange.addEventListener("change", function(e) {
             currentVolume = e.currentTarget.value / 100;
         })
@@ -301,7 +313,7 @@
                     askedhru = true;
             } else {askedhru = false};
 
-            if (/\b(stupid|fat|dumb|dimwit|dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|your mom)\b/i.test(prompt1)) {
+            if (/\b(stupid|fat|dumb|dimwit|dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|your mom|fool)\b/i.test(prompt1)) {
                     lovesme = false; 
                     mentiondr = false; 
                     cursed = true;
@@ -329,7 +341,7 @@
             if (askedhru)            out += pick(feelingtodaytable[type]);
             if (bananamentioned)     out += pick(bananatable[type]);
             if (saidgoodbye)         out += pick(byetable[type]);
-            if (slackersaid)         out += pick(slackertablev[type]);
+            if (slackersaid)         out += pick(slackertable[type]);
             if (foodmentioned)       out += pick(foodtable[type]);
             if (askaboutspeciality)  out += pick(specialitytable[type]);
             const noTriggers = !saidhi && !askaboutspeciality && !mentiondr && !mentionapple && 
@@ -356,7 +368,6 @@
                     easing: 'ease-out'
                 }
             );
-
             friendcount2.textContent = ("Your friendly points: " + affection);
             let utterance = new SpeechSynthesisUtterance(talking2.textContent);
             utterance.lang = 'en-US';
