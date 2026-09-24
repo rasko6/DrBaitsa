@@ -8,7 +8,7 @@ An open-source,  symbolic AI chatbot written in JavaScript. Attempt to make a mo
 3. More moods for the responses
 4. No crazy mood swings
 5. Typewriter effect
-6. Fuzzy matching
+6. Fuzzy matching ✔
 # Font Used
 https://fonts.google.com/specimen/Play
 # Languages Used
