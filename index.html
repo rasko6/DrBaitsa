@@ -253,12 +253,7 @@
                     affection = affection - 1;
             } else {mentionapple = false};
 
-            if (/\b(insult me|you piece of junk)\b/i.test(prompt1)) {
-                    insults = true  
-                    affection = affection - 2;
-            } else {insults = false};
-
-            if (/\b(stupid|fat|dumb|dimwit|dum-dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|bitch|hate you|loser|pathetic)\b/i.test(prompt1)) {
+            if (/\b(stupid|fat|dumb|dimwit|dum-dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|bitch|hate you|loser|pathetic|junk|you trash)\b/i.test(prompt1)) {
                     cursed = true  
                     affection = affection - 6;
             } else {cursed = false;};
@@ -276,7 +271,7 @@
                     affection = affection + 2;
             } else {lovesme = false};
 
-            if (/\b(wife|your wife)\b/i.test(prompt1)) {
+            if (/\b(wife|your wife|do you have a wife)\b/i.test(prompt1)) {
                     wifementioned = true  
                     affection = affection - 1;
             } else {wifementioned = false};
@@ -340,11 +335,10 @@
             if (slackersaid)         out += pick(slackertablev[type]);
             if (foodmentioned)       out += pick(foodtable[type]);
             if (askaboutspeciality)  out += pick(specialitytable[type]);
-            if (insults)             out += pick(insulttable[type]);
             const noTriggers = !saidhi && !askaboutspeciality && !mentiondr && !mentionapple && 
                             !cursed && !cotd && !storyask && !wifementioned && !lovesme && 
                             !oksay && !whyask && !askedhru && !casanstory && !bananamentioned && 
-                            !saidgoodbye && !foodmentioned && !slackersaid && !insults;
+                            !saidgoodbye && !foodmentioned && !slackersaid;
 
             if (noTriggers) {
                 out += pick(defaulttable[type]);
