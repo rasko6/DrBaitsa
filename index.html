@@ -234,7 +234,7 @@
 
         function buildResponse() {
             let prompt1=document.getElementById("text2").value
-            normalize(prompt1);
+            prompt1 = normalize(prompt1);
             if (prompt1 !== ""|prompt1 !== " ")
             {logging.append("user: ["+ prompt1 +"] ")
             console.log("user: " + prompt1);
