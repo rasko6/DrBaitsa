@@ -1,0 +1,386 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            body
+            {
+                padding: 80px;
+                font-family: 'Play', sans-serif;
+                color: white;
+                background-color: blue;
+            }
+            .podknopk {
+                margin-top: 10px;
+            }
+            h1 {
+                font-weight: 600;
+            }
+            .dialog{
+                width: 550px;
+                height: 100px;
+                justify-content: center;
+                padding: 5px;
+                border: 2px solid white;
+                overflow: auto;
+            }
+            .dialog:hover{
+                width: 550px;
+                height: 100px;
+                justify-content: center;
+                padding: 5px;
+                border: 2px solid #b4b4b4;
+                color: #b4b4b4;
+                overflow: auto;
+                cursor: pointer;
+            }
+            a:hover{
+                cursor: pointer;
+                color: #b4b4b4;
+            }
+            button{
+                font-family: 'Play', sans-serif;
+            }
+            input{
+                font-family: 'Play', sans-serif;
+            }
+            .talking2{
+                width: 600px;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>Hi, It's me, Doctor Baitsa.</h1>
+    <p id="talking" class="talking2">I respond to your prompt. Click on the log to copy it. Text me:</p>
+    <input id="text2" placeholder="Hi, Baitsa!" type="text">
+    <input type="button" onclick="submitt()" value="Submit" id="submitting"/>
+    <button onclick="settingss()" id="settingsbut">Settings</button>
+    <button onclick="LT()" id="lighthem" class="podknopk" style="display: none;" >Light theme</button>
+    <button onclick="DT()" id="darhem" class="podknopk" style="display: none;" >Dark theme</button>
+    <button onclick="RT()" id="resthem" class="podknopk" style="display: none;" >DOS</button>
+    <p>TTS volume tweaker:</p><input id="tweaksound" type="range" min="0" max="100" step="1" value="100"/>
+    <p>Log: </p>
+    <div class="dialog" onclick="copylog();" id="14112123">
+        <p id="loggg"></p>
+    </div>
+    <button onclick="AREUSUR()" class="podknopk">Clear log</button>
+    <button onclick="DL()" class="podknopk" style="display: none;" id="deletetee">You sure?</button>
+    <a onclick="window.location='baitsa.png'">View plan</a>
+    <p id="friendcount">Your friendly points: 0</p>
+    <script>
+        const friendcount2 = document.getElementById('friendcount');
+        let affection = 0;
+        const soundRange = document.getElementById('tweaksound');
+        let currentVolume = 100;
+        let deleteLog = document.getElementById("deletetee")
+        let logging = document.getElementById("loggg")
+        let submitttttt=document.getElementById("submitting")
+        let saidhi = false;
+        let mentionapple = false;
+        let mentiondr = false;
+        const body1 = document.body;
+        let settingsOpen = false;
+
+        /*IMPORTANT --- THINKING DATA*/
+
+        const hitable = {
+            positive: ["Hi! ", "Hey! ", "Hello! ", "What's up? ", "'Sup? ", "Heya! ", "Hi to you too! "],
+            negative: ["I won't tell hi to you after what you did. ", "Don't 'HI!!' me now. ", "No. "]
+        };
+        const slackertable = {
+            positive: ["Let's cool it down! Wanna talk about bananas instead? ", "Let's cool it down! Wanna talk about apples instead? ", "Please don't call people slackers! "],
+            negative: ["Don't call me a 'slacker'. I have a doctorate. ", "Slacker, huh. Do not call me that. "]
+        }
+        const yeahtable = {
+            positive: ["Yup, that's me. ", "You called? ", "Yeah, that's me. ", "That's me. ", "My name, mentioned. "],
+            negative: ["Shut it. ", "Zip it. ", "Shut up. "]
+        };
+
+        const appletable = {
+            positive: ["Apples are a red fruit which i like. ", "You wanna know more about apples? Here's a fun fact: apple seeds contain small amounts of amygdalin, a sugar and cyanide compound known as a cyanogenic glycoside. small amounts of apple seeds cause no ill effects, but extremely large doses can. That's why I like them. ", "I love apples! ", "Apples are so yummy! ", "Apples exist in real life. That's cool. "],
+            negative: ["I refuse to talk about apples. ", "NO APPLES!!! "]
+        };
+        const tupoitable = {
+            positive: ["Let's cool it down! ", "Easy, pal. ", "Language!  ", "Don't say that! ", "A bad word?! ", "That's a no-no. ", "Easy. ", "Don't say those bad words! "],
+            negative: ["What did you call me, punk?! ", "You think THAT will offend me? Don't flatter yourself. ", "Shush! ", "Just stop! Shut up! "],
+            };
+        const thanktable = {
+            positive: ["Aww, thank you, mate. ", "Thank you! ", "Thanks!  ", "I'm flattered! ", "So nice! ", "He-he, stop!... Actually, don't. ", "Aww, you too! "],
+            negative: ["Uh uh. ", "Okay. ", "Don't try to flatter me NOW. "]
+        }
+        const storytable = {
+            positive: ["You wanna hear a story? Sure! One time I ate an apple and it blew up my brains so I had to get brain surgery. ", "Want a story? Sure. One time I was walking down the street and met some random guy. I said, 'HI!' but he said 'Fuck you' in response and left. Aren't my social skills awesome? ", "Want a story? Can do. Once upon a time I forgot to bring my lunch and almost starved to death. That's how I met my ex wife... Sniff... Cassandra...", ],
+            negative: ["You wanna hear a story? Well you're not getting one! ", "I won't tell you stories after what you said. ", "No stories for you. "]
+        }
+        const wifetable = {
+            positive: ["Wife? I don't have a wife. ", "What wife bro. "],
+            negative: ["AND NOW YOU'RE MOCKING ME ABT BEING SINGLE!!! "],
+        }
+        const coloroftheday = {
+            positive: ["The color of the day is red! ", "The color of the day is blue! ", "The color of the day is green! ", "The color of the day is yellow! "],
+            negative: ["No color of the day for ya. "]
+        };
+        const speaktable = {
+            positive: ["Ok? That's all? ", "Mhm.", "You're very agreeable today. "],
+            negative: ["Yeah, Okay. Whatever. "]
+        };
+        const whybecausetable = {
+            positive: ["Because I need a raise, stat. ", "BECAUSE!", "Umm... Because: "],
+            negative: ["Because I said so. "]
+        };
+        const feelingtodaytable = {
+            positive: ["Today, I'm feeling AWESOME! Don't ruin that mood for me. ", "Today I'm feeling okay. WBU? ", "Today I'm fine. ", "Fine. ", "I'm so happy today! Thank you for asking. ", "I'm feeling very sad. ", "I'm drowsy. ", "We were talking about YOU, not ME. How are YOU!! "],
+            negative: ["And NOW you're asking how I am?! After how you've treated me?!?!?! "],
+        };
+        const foodtable = {
+            positive: ["Food mentioned! I love food! What do you think? ", "I like food. My favorite is raspberry gummy. I hate apples. WBU. ", "Food! Let's talk about food! ", "Food is the best thing ever. Except for apples. "],
+            negative: ["I'm not talking about food with YOU. Your presence, in fact, makes me wanna puke. "]
+        }
+        const byetable = {
+            positive: ["Bye, I guess. ", "Goodbye, fellow co-speaker! ", "See ya. ", "Goodbye. "],
+            negative: ["Get lost. "],
+        }
+        const defaulttable = {
+            positive: ["Tell me more! ", "Mmm... I don't feel like thinking rn... Make a new point. ", "IDK. ", "Erm... What did you just say... "],
+            negative: ["...I...Don't...Care. ", "Talk to someone else. "],
+        };
+        const insulttable = {
+            positive: ["Woah there! I won't insult you, brah. "],
+            negative: ["Y ... You're a... a ..  a ....a. . ..a dummy... "],
+        }
+        const bananatable = {
+            positive: ["I love bananas! ", "Bananas are cool I guess. ", "Wanna talk about bananas? ", "I love bananas! I can't get enough of their tender juiciness, pal!"],
+            negative: ["DONT YOU DARE MENTION BANANAS AFTER WHAT U DID!!! "]
+        }
+        const specialitytable = {
+            positive: ["I'm a doctor. I have a doctorate. ", "I'm a doctor 'cuz I heal people and stuff. ", "I became a doctor 'cuz they get paid a lot. ", "I'ma heal you if you want! Come whenever! "],
+            negative: ["I won't heal you. ", "We're not talking 'bout my job. "]
+        }
+        const setBut = document.getElementById('settingsbut')
+        const ltBut = document.getElementById('lighthem')
+        const drBut = document.getElementById('darhem')
+        const talking2=document.getElementById("talking");
+        const resetBut = document.getElementById('resthem')
+        const darkModeMql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        function submitt() {
+            talking2.textContent = "I'm sorry, I can't respond to that."
+            buildResponse()
+        }
+        if (darkModeMql && darkModeMql.matches) {
+            DT();
+        } else {
+            LT()
+        }
+
+        soundRange.addEventListener("change", function(e) {
+            currentVolume = e.currentTarget.value / 100;
+        })
+
+        function AREUSUR(){
+            deleteLog.style = "display: block;"
+        }
+
+        function DL(){
+            deleteLog.style = "display: none;"
+            logging.textContent="";
+        }
+
+        function settingss() {
+            if (settingsOpen == false) {
+                settingsOpen = true;
+                ltBut.style = "display: block;"
+                drBut.style = "display: block;"
+                resetBut.style = "display: block;"
+            } else {
+                settingsOpen = false;
+                ltBut.style = "display: none;"
+                drBut.style = "display: none;"
+                resetBut.style = "display: none;"
+            };
+        }
+        function copylog() {
+        var copyText = document.getElementById("loggg").textContent;
+        navigator.clipboard.writeText(copyText);
+        document.getElementById('14112123').animate(
+            [
+                { transform: 'translateY(-8px)' },
+                { transform: 'translateY(0px)' }
+            ],
+            {
+                duration: 200,
+                easing: 'ease-out'
+            }
+            );
+        }
+        function LT(){ /* light theme */
+            body1.style = "background-color: white; color: black"
+        }
+        function RT(){/* reset theme */
+            body1.style = "background-color: blue; color: white"
+        }
+        function DT(){/* dark theme */
+            body1.style = "background-color: #202020; color: white"
+        }
+
+
+        function buildResponse() {
+            let prompt1=document.getElementById("text2").value
+            if (prompt1 !== ""|prompt1 !== " ")
+            {logging.append("user: ["+ prompt1 +"] ")
+            console.log("user: " + prompt1);
+
+            if (/\b(goodbye|bye|see ya|see you later)\b/i.test(prompt1)) {
+                saidgoodbye = true
+            } else { saidgoodbye = false}
+
+            if (/\b(hi|hello|hey|sup|good morning|good afternoon|good evening|hiiiiiiiiiiiiii|hiiiiiiiiiiiii|hiiiiiiiiiiii|hiiiiiiiiii|hiiiiii|hiii|hii)\b/i.test(prompt1)) {
+                saidhi = true
+                affection = affection + 1;
+            } else { saidhi = false}
+
+            if (/\b(, slacker|you slacker)\b/i.test(prompt1)) {
+                slackersaid = true
+                affection = affection - 1;
+            } else { slackersaid = false}
+
+            if (/\b(hey doctor|hey baitsa|youre not being funny|you are not being funny|hey batisa)\b/i.test(prompt1)) {
+                    mentiondr = true  
+            } else {mentiondr = false};
+
+            if (/\b(apple|aple|apel|apples|the red fruit you hate)\b/i.test(prompt1)) {
+                    mentionapple = true  
+                    affection = affection - 1;
+            } else {mentionapple = false};
+
+            if (/\b(insult me|you piece of junk)\b/i.test(prompt1)) {
+                    insults = true  
+                    affection = affection - 2;
+            } else {insults = false};
+
+            if (/\b(stupid|fat|dumb|dimwit|dum-dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|bitch|hate you|loser|pathetic)\b/i.test(prompt1)) {
+                    cursed = true  
+                    affection = affection - 6;
+            } else {cursed = false;};
+
+            if (/\b(color of the day)\b/i.test(prompt1)) {
+                    cotd = true  
+            } else {cotd = false};
+
+            if (/\b(banana|bananas)\b/i.test(prompt1)) {
+                    bananamentioned = true  
+            } else {bananamentioned = false};
+
+            if (/\b(nice job|you're cool|you are cool|youre cool|i like you|good job|good|awesome|amazing|love you|handsome|smart|impressive)\b/i.test(prompt1)) {
+                    lovesme = true  
+                    affection = affection + 2;
+            } else {lovesme = false};
+
+            if (/\b(wife|your wife)\b/i.test(prompt1)) {
+                    wifementioned = true  
+                    affection = affection - 1;
+            } else {wifementioned = false};
+
+            if (/\b(tell me a story|tell story|story)\b/i.test(prompt1)) {
+                    storyask = true  
+                    affection = affection + 1;
+            } else {storyask = false};
+
+            if (/\b(why)\b/i.test(prompt1)) {
+                    whyask = true  
+            } else {whyask = false};
+
+            if (/\b(food)\b/i.test(prompt1)) {
+                    foodmentioned = true  
+            } else {foodmentioned = false};
+
+            if (/\b(ok|okay)\b/i.test(prompt1)) {
+                    oksay = true;
+                    affection = affection - 1;
+            } else {oksay = false};
+
+            if (/\b(tell me about doctors|tell me about your job|your job|your speciality|speciality|work|why are you a doctor|why doctor)\b/i.test(prompt1)) {
+                    askaboutspeciality = true;
+                    affection = affection + 1;
+            } else {askaboutspeciality = false};
+
+            if (/\b(how are you)\b/i.test(prompt1)) {
+                    askedhru = true;
+            } else {askedhru = false};
+
+            if (/\b(stupid|fat|dumb|dimwit|dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|your mom)\b/i.test(prompt1)) {
+                    lovesme = false; 
+                    mentiondr = false; 
+                    cursed = true;
+                    affection = affection - 5;
+            }
+
+            showResponse(saidhi, mentiondr, mentionapple);}
+
+        }
+
+        
+        function showResponse(saidhi, mentiondr, mentionapple) {
+            const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+            let out = "";
+            const type = affection >= 0 ? "positive" : "negative";
+            if (saidhi)              out += pick(hitable[type]);
+            if (mentiondr)           out += pick(yeahtable[type]) ;
+            if (mentionapple)        out += pick(appletable[type]);
+            if (cursed)              out += pick(tupoitable[type]);
+            if (cotd)                out += pick(coloroftheday[type]);
+            if (storyask)            out += pick(storytable[type]);
+            if (wifementioned)       out += pick(wifetable[type]);
+            if (lovesme)             out += pick(thanktable[type]);
+            if (oksay)               out += pick(speaktable[type]);
+            if (whyask)              out += pick(whybecausetable[type]);
+            if (askedhru)            out += pick(feelingtodaytable[type]);
+            if (bananamentioned)     out += pick(bananatable[type]);
+            if (saidgoodbye)         out += pick(byetable[type]);
+            if (slackersaid)         out += pick(slackertablev[type]);
+            if (foodmentioned)       out += pick(foodtable[type]);
+            if (askaboutspeciality)  out += pick(specialitytable[type]);
+            if (insults)             out += pick(insulttable[type]);
+            const noTriggers = !saidhi && !askaboutspeciality && !mentiondr && !mentionapple && 
+                            !cursed && !cotd && !storyask && !wifementioned && !lovesme && 
+                            !oksay && !whyask && !askedhru && !casanstory && !bananamentioned && 
+                            !saidgoodbye && !foodmentioned && !slackersaid && !insults;
+
+            if (noTriggers) {
+                out += pick(defaulttable[type]);
+            }
+            talking2.textContent = out.trim();
+
+            console.log("baitsa: " + talking2.textContent);
+            console.log("aff: " + affection);
+            logging.append("baitsa: [" + talking2.textContent + "] current FP-s: " + affection + ". ");
+
+            talking2.animate(
+                [
+                    { transform: 'translateY(-8px)' },
+                    { transform: 'translateY(0px)' }
+                ],
+                {
+                    duration: 200,
+                    easing: 'ease-out'
+                }
+            );
+
+            friendcount2.textContent = ("Your friendly points: " + affection);
+            let utterance = new SpeechSynthesisUtterance(talking2.textContent);
+            utterance.lang = 'en-US';
+            utterance.volume = currentVolume;
+
+            utterance.onstart = () => {
+                submitttttt.disabled = true;
+            };
+            utterance.onend = () => {
+                submitttttt.disabled = false;
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+    </script>
+    </body>
+ </html>
