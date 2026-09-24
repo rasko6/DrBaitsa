@@ -223,9 +223,18 @@
             body1.style = "background-color: #202020; color: white"
         }
 
+        function normalize(prompt1) {
+            return prompt1
+                .toLowerCase()
+                .replace(/[^\p{L}\p{N}\s]/gu, '')
+                .replace(/(.)\1+/g, '$1')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
 
         function buildResponse() {
             let prompt1=document.getElementById("text2").value
+            normalize(prompt1);
             if (prompt1 !== ""|prompt1 !== " ")
             {logging.append("user: ["+ prompt1 +"] ")
             console.log("user: " + prompt1);
@@ -314,7 +323,6 @@
 
         }
 
-        
         function showResponse(saidhi, mentiondr, mentionapple) {
             const pick = arr => arr[Math.floor(Math.random() * arr.length)];
             let out = "";
@@ -337,7 +345,7 @@
             if (askaboutspeciality)  out += pick(specialitytable[type]);
             const noTriggers = !saidhi && !askaboutspeciality && !mentiondr && !mentionapple && 
                             !cursed && !cotd && !storyask && !wifementioned && !lovesme && 
-                            !oksay && !whyask && !askedhru && !casanstory && !bananamentioned && 
+                            !oksay && !whyask && !askedhru && !bananamentioned && 
                             !saidgoodbye && !foodmentioned && !slackersaid;
 
             if (noTriggers) {
