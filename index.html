@@ -27,18 +27,18 @@
 
             }
             .dialog{
-                width: 550px;
-                height: 100px;
+                width: 355px;
+                height: 180px;
                 justify-content: center;
-                padding: 5px;
+                padding: 10px;
                 border: 2px solid white;
                 overflow: auto;
             }
             .dialog:hover{
-                width: 550px;
-                height: 100px;
+                width: 355px;
+                height: 180px;
                 justify-content: center;
-                padding: 5px;
+                padding: 10px;
                 border: 2px solid #b4b4b4;
                 color: #b4b4b4;
                 overflow: auto;
@@ -70,6 +70,25 @@
             input{
                 transition: transform 0.2s ease-out;
             }
+            .containerforgui{
+                max-width: 180px;
+                height: 180px;
+                border: 2px solid white;
+                padding: 10px;
+            }
+            .containerforgui:hover{
+                max-width: 180px;
+                height: 180px;
+                border: 2px solid #b4b4b4;
+                padding: 10px;
+            }
+            .cont2{
+                width: auto;
+                height: auto;
+                margin-top: 10px;
+                display: flex;
+                gap: 10px;
+            }
         </style>
     </head>
     <body>
@@ -81,15 +100,18 @@
     <button onclick="LT()" id="lighthem" class="podknopk" style="display: none;" >Light theme</button>
     <button onclick="DT()" id="darhem" class="podknopk" style="display: none;" >Dark theme</button>
     <button onclick="RT()" id="resthem" class="podknopk" style="display: none;" >DOS</button>
-    <p>TTS volume tweaker:</p><input id="tweaksound" type="range" min="0" max="100" step="1" value="100"/>
-    <p>Log: </p>
+    <div class="cont2">
     <div class="dialog" onclick="copylog();" id="14112123">
         <p id="loggg"></p>
     </div>
+    <div class="containerforgui">
+    <p>TTS volume tweaker:</p><input id="tweaksound" type="range" min="0" max="100" step="1" value="100"/>
     <button onclick="AREUSUR()" class="podknopk">Clear log</button>
     <button onclick="DL()" class="podknopk" style="display: none;" id="deletetee">You sure?</button>
-    <a onclick="window.location='baitsa.png'">View plan</a>
+    <button onclick="window.location='baitsa.png'">View plan</button>
     <p id="friendcount">Your friendly points: 0</p>
+    </div>
+    </div>
     <script>
         const friendcount2 = document.getElementById('friendcount');
         let affection = 0;
