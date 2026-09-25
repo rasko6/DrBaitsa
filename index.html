@@ -13,9 +13,11 @@
             }
             .podknopk {
                 margin-top: 10px;
+                transition: transform 0.2s ease-out;
             }
             h1 {
                 font-weight: 600;
+                transition: transform 0.2s ease-out, color 0.2s ease-out;
             }
             h1:hover {
                 font-weight: 600;
@@ -45,6 +47,8 @@
             a:hover{
                 cursor: pointer;
                 color: #b4b4b4;
+                transform: translateY(-2px);
+                transition: transform 0.2s ease-out;
             }
             button{
                 font-family: 'Play', sans-serif;
@@ -54,6 +58,17 @@
             }
             .talking2{
                 width: 600px;
+            }
+            button:hover{
+                transform: translateY(-2px);
+                transition: transform 0.2s ease-out;
+            }
+            input:hover{
+                transform: translateY(-2px);
+                transition: transform 0.2s ease-out;
+            }
+            input{
+                transition: transform 0.2s ease-out;
             }
         </style>
     </head>
@@ -328,6 +343,10 @@
             }
 
             showResponse(saidhi, mentiondr, mentionapple);}
+
+        }
+
+        function blockFarm(){
 
         }
 
