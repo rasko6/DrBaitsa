@@ -282,10 +282,9 @@
 
             if (/\b(apple|aple|apel|apples|the red fruit you hate)\b/i.test(prompt1)) {
                     mentionapple = true  
-                    affection = affection - 1;
             } else {mentionapple = false};
 
-            if (/\b(stupid|fat|dumb|dimwit|dum-dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|bitch|hate you|loser|pathetic|junk|you trash)\b/i.test(prompt1)) {
+            if (/\b(stupid|fat|dumb|dimwit|dum-dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|bitch|hate you|loser|pathetic|junk|you trash|fool)\b/i.test(prompt1)) {
                     cursed = true  
                     affection = affection - 5;
             } else {cursed = false;};
@@ -335,22 +334,20 @@
                     askedhru = true;
             } else {askedhru = false};
 
-            if (/\b(stupid|fat|dumb|dimwit|dum|dumdum|dummy|ninny|nincompoop|ass|cretin|dork|sap|imbecile|moron|bastard|idiot|motherfucker|unclefucker|your mom|fool)\b/i.test(prompt1)) {
-                    lovesme = false; 
-                    mentiondr = false; 
-                    cursed = true;
-                    affection = affection - 5;
-            }
-
             showResponse(saidhi, mentiondr, mentionapple);}
 
         }
 
         function blockFarm(){
-
+            if (lovesme == true && affection > 5){
+                alert("don't farm!");
+                alert("your FP has been decreased to zero.");
+                affection = 0;
+            }
         }
 
         function showResponse(saidhi, mentiondr, mentionapple) {
+            blockFarm()
             const pick = arr => arr[Math.floor(Math.random() * arr.length)];
             let out = "";
             const type = affection >= 0 ? "positive" : "negative";
