@@ -164,7 +164,7 @@
             negative: ["Get lost. "],
         }
         const defaulttable = {
-            positive: ["Tell me more! ", "Mmm... I don't feel like thinking rn... Make a new point. ", "IDK. ", "Erm... What did you just say... "],
+            positive: ["Tell me more! ", "Mmm... I don't feel like thinking rn... Make a new point. ", "Care to elaborate? ", "Elaborate, please. ", "Let's talk 'bout something else. "],
             negative: ["...I...Don't...Care. ", "Talk to someone else. "],
         };
         const insulttable = {
@@ -299,12 +299,12 @@
 
             if (/\b(nice job|nice|you're cool|you are cool|youre cool|i like you|good job|good|awesome|amazing|love you|handsome|smart|impressive)\b/i.test(prompt1)) {
                     lovesme = true  
-                    affection = affection + 2;
+                    affection = affection + 1;
             } else {lovesme = false};
 
             if (/\b(wife|your wife|do you have a wife)\b/i.test(prompt1)) {
                     wifementioned = true  
-                    affection = affection - 2;
+                    affection = affection - 1;
             } else {wifementioned = false};
 
             if (/\b(tell me a story|tell story|story)\b/i.test(prompt1)) {
@@ -322,7 +322,6 @@
 
             if (/\b(ok|okay)\b/i.test(prompt1)) {
                     oksay = true;
-                    affection = affection - 1;
             } else {oksay = false};
 
             if (/\b(tell me about doctors|tell me about your job|your job|your speciality|speciality|work|why are you a doctor|why doctor)\b/i.test(prompt1)) {
