@@ -30,6 +30,7 @@
                 width: 355px;
                 height: 180px;
                 justify-content: center;
+                transition: transform 0.2s ease-out;
                 padding: 10px;
                 border: 2px solid white;
                 overflow: auto;
@@ -37,6 +38,8 @@
             .dialog:hover{
                 width: 355px;
                 height: 180px;
+                transform: translateY(-2px);
+                transition: transform 0.2s ease-out;
                 justify-content: center;
                 padding: 10px;
                 border: 2px solid #b4b4b4;
@@ -74,16 +77,20 @@
                 height: 180px;
                 border: 2px solid white;
                 padding: 10px;
+                transition: transform 0.2s ease-out;
             }
             .containerforgui:hover{
                 width: 190px;
                 height: 180px;
+                transform: translateY(-2px);
+                transition: transform 0.2s ease-out;
                 border: 2px solid #b4b4b4;
                 padding: 10px;
             }
             .cont2{
                 width: auto;
                 height: auto;
+                transition: transform 0.2s ease-out;
                 margin-top: 10px;
                 display: flex;
                 gap: 10px;
@@ -286,6 +293,10 @@
             {logging.append("user: ["+ prompt1 +"] ")
             console.log("user: " + prompt1);
 
+            if (/\b(insult me|say something foul|say a bad word|say something bad about me)\b/i.test(prompt1)) {
+                insultme = true
+            } else { insultme = false}
+
             if (/\b(goodbye|bye|see ya|see you later)\b/i.test(prompt1)) {
                 saidgoodbye = true
             } else { saidgoodbye = false}
@@ -388,11 +399,12 @@
             if (saidgoodbye)         out += pick(byetable[type]);
             if (slackersaid)         out += pick(slackertable[type]);
             if (foodmentioned)       out += pick(foodtable[type]);
+            if (insultme) out += pick(insulttable[type]);
             if (askaboutspeciality)  out += pick(specialitytable[type]);
             const noTriggers = !saidhi && !askaboutspeciality && !mentiondr && !mentionapple && 
                             !cursed && !cotd && !storyask && !wifementioned && !lovesme && 
                             !oksay && !whyask && !askedhru && !bananamentioned && 
-                            !saidgoodbye && !foodmentioned && !slackersaid;
+                            !saidgoodbye && !foodmentioned && !slackersaid && !insultme;
 
             if (noTriggers) {
                 out += pick(defaulttable[type]);
