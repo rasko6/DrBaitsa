@@ -71,13 +71,13 @@
                 transition: transform 0.2s ease-out;
             }
             .containerforgui{
-                max-width: 180px;
+                width: 190px;
                 height: 180px;
                 border: 2px solid white;
                 padding: 10px;
             }
             .containerforgui:hover{
-                max-width: 180px;
+                width: 190px;
                 height: 180px;
                 border: 2px solid #b4b4b4;
                 padding: 10px;
@@ -107,7 +107,7 @@
     <div class="containerforgui">
     <p>TTS volume tweaker:</p><input id="tweaksound" type="range" min="0" max="100" step="1" value="100"/>
     <button onclick="AREUSUR()" class="podknopk" id="123123123123123123213123213">Clear log</button>
-    <button onclick="DL()" class="podknopk" style="display: none;" id="deletetee">You sure?</button>
+    <button onclick="DL()" class="podknopk" style="display: none;" id="deletetee">Reallyyy</button>
     <button onclick="window.location='baitsa.png'">View plan</button>
     <p id="friendcount">Your friendly points: 0</p>
     </div>
@@ -235,11 +235,11 @@
 
         function AREUSUR(){
             document.getElementById('123123123123123123213123213').style = "display: none;";
-            deleteLog.style = "display: block;"
+            deleteLog.style.display = "inline-block";
         }
 
         function DL(){
-            document.getElementById('123123123123123123213123213').style = "display: block;";
+            document.getElementById('123123123123123123213123213').style = "display: inline-block;";
             deleteLog.style = "display: none;"
             logging.textContent="";
         }
