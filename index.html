@@ -106,7 +106,7 @@
     </div>
     <div class="containerforgui">
     <p>TTS volume tweaker:</p><input id="tweaksound" type="range" min="0" max="100" step="1" value="100"/>
-    <button onclick="AREUSUR()" class="podknopk">Clear log</button>
+    <button onclick="AREUSUR()" class="podknopk" id="123123123123123123213123213">Clear log</button>
     <button onclick="DL()" class="podknopk" style="display: none;" id="deletetee">You sure?</button>
     <button onclick="window.location='baitsa.png'">View plan</button>
     <p id="friendcount">Your friendly points: 0</p>
@@ -234,10 +234,12 @@
         })
 
         function AREUSUR(){
+            document.getElementById('123123123123123123213123213').style = "display: none;";
             deleteLog.style = "display: block;"
         }
 
         function DL(){
+            document.getElementById('123123123123123123213123213').style = "display: block;";
             deleteLog.style = "display: none;"
             logging.textContent="";
         }
